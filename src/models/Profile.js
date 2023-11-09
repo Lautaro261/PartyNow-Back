@@ -2,17 +2,26 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "event",
+    "profile",
     {
       id: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        defaultValue: DataTypes.UUIDV4, //revisar id
         primaryKey: true,
       },
-      status: {
-        type: DataTypes.ENUM("pending", "approved", "rejected"),
-      },
       name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      last_name: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      dni_cuil: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      phone: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -20,42 +29,21 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      hour: {
-        type: DataTypes.STRING,
+      redes: {
+        type: DataTypes.STRING, // array u objeto pasado a string
         allowNull: true,
       },
-      description: {
-        type: DataTypes.STRING,
+      number_tot_events_org: {
+        type: DataTypes.FLOAT,
         allowNull: true,
       },
-      link: {
-        type: DataTypes.STRING,
+      number_tot_events_assis: {
+        type: DataTypes.FLOAT,
         allowNull: true,
-      },
-      refund: {
-        type: DataTypes.BOOLEAN,
-      },
-      iterativo: {
-        type: DataTypes.BOOLEAN,
-      },
-      number_of_tickets_sold: {
-        type: DataTypes.FLOAT,
-      },
-      number_of_tickets_scanned: {
-        type: DataTypes.FLOAT,
-      },
-      total_number_of_reviews: {
-        type: DataTypes.FLOAT,
-      },
-      numbers_of_series: {
-        type: DataTypes.FLOAT,
-      },
-      average_score: {
-        type: DataTypes.FLOAT,
       },
     },
     {
-      timestamps: false,
+      timestamps: true,
     }
   );
 };

@@ -8,6 +8,13 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
     },
+    status: {
+      type: DataTypes.ENUM("pending", "approved", "rejected"),
+    },
+    date: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     
   }, {
     timestamps: true,
