@@ -2,26 +2,22 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "profile",
+    "place",
     {
       id: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4, //revisar id
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      last_name: {
+      photo: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      dni_cuil: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      phone: {
+      capacitance: {
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -29,17 +25,8 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      redes: {
-        type: DataTypes.STRING, // array u objeto pasado a string
-        allowNull: true,
-      },
-      number_tot_events_org: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-      },
-      number_tot_events_assis: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
+      active: {
+        type: DataTypes.BOOLEAN,
       },
     },
     {

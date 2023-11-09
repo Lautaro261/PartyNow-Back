@@ -2,37 +2,28 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "establishment",
+    "location",
     {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      location: {
+      addres: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      name: {
+      numeration: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      photos: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      /*    description:{                                    
-        type: DataTypes.STRING,
-        allowNull: true,
-    }, */
-      capacitance: {
+      maps: {
         type: DataTypes.STRING,
         allowNull: true,
       },
     },
     {
-      timestamps: false,
+      timestamps: true,
     }
   );
 };
-
