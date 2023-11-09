@@ -28,19 +28,12 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      location: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
       link: {
         type: DataTypes.STRING,
         allowNull: true,
       },
       refund: {
         type: DataTypes.BOOLEAN,
-      },
-      capacitance: {
-        type: DataTypes.FLOAT,
       },
       iterativo: {
         type: DataTypes.BOOLEAN,

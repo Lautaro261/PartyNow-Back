@@ -1,5 +1,5 @@
 const { ApolloServer, gql } = require("apollo-server-express");
-const express = require("express");
+const express = require("express");  
 
 // typeDefs
 const typeDefs = gql `
@@ -21,7 +21,7 @@ function createApolloServer() {
     return server;
 }
 
-// Crear una función para iniciar el servidor
+
 function startServer(port) {
     const app = express();
     const server = createApolloServer();

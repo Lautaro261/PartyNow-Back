@@ -2,30 +2,30 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "globalStatistics",
+    "submenu",
     {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      events: {
-        type: DataTypes.FLOAT,
+      name: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
-      organizer: {
-        type: DataTypes.FLOAT,
+      date: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
-      clients: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
+      active: {
+        type: DataTypes.BOOLEAN,
       },
-      tickets: {
-        type: DataTypes.FLOAT,
+      controller: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
     },
+
     {
       timestamps: true,
     }

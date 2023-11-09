@@ -2,27 +2,23 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "globalStatistics",
+    "location",
     {
       id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      events: {
-        type: DataTypes.FLOAT,
+      addres: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
-      organizer: {
-        type: DataTypes.FLOAT,
+      numeration: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
-      clients: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-      },
-      tickets: {
-        type: DataTypes.FLOAT,
+      maps: {
+        type: DataTypes.STRING,
         allowNull: true,
       },
     },

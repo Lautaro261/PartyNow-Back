@@ -18,10 +18,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      /*     qr: {                                      
-      type: DataTypes.STRING,
-      allowNull: false,   
-    }, */
+      qr: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       /*   date:{                                      
         type:DataTypes.STRING,
         allowNull: true,   
