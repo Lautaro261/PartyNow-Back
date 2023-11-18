@@ -46,76 +46,102 @@ sequelize.models = Object.fromEntries(capsEntries);
 /////// ACA IMPORTAMOS LOS MODELOS /////// 
 const {
    Assigned,
-   Establishment,
    Event,
    Follower,
-   Review,
-   Series,
-   Ticket,
-   User,
-   Rol,
-   Workpeople,
+   Location,
+   Menu,
+   Permission,
+   Place,
+   Profile,
    Requests,
+   Review,
+   Rol,
+   Series,
+   SubMenu,
+   Ticket,
+   TypeOfPlace,
+   User
 
 } = sequelize.models
 
 
 /////// ACA VIENEN LAS RELACIONES ///////
 
-//Usuario con la tabla seguidores
+//Usuario con Persona
+Profile.hasOne(User);
+User.belongsTo(Profile);
+
+//Usuario con Seguidores
 User.hasMany(Follower, { as: 'customers', foreignKey: 'customersId' });
 User.hasMany(Follower, { as: 'organizers', foreignKey: 'organizersId' });
 
-//Rol con usuario
+//Rol con Usuario 
 Rol.hasMany(User);
 User.belongsTo(Rol);
 
-// Usuario con Review
-User.hasMany(Review);
-Review.belongsTo(User);
+//Rol con permiso
+Rol.hasMany(Permission);
+Permission.belongsTo(Rol);
 
-// Tabla usuario con establecimiento
-User.hasMany(Establishment);
-Establishment.belongsTo(User);
+//Permisos con subMenu
+SubMenu.hasMany(Permission);
+Permission.belongsTo(SubMenu);
 
-//User con Evento
+//Menu con SubMenu
+Menu.hasMany(SubMenu);
+SubMenu.belongsTo(Menu);
+
+//Usuario con Evento
 User.hasMany(Event);
 Event.belongsTo(User);
 
-//User con trabajadores
-User.hasMany(Workpeople, { as: 'workers', foreignKey: 'workersId' });
-User.hasMany(Workpeople, { as: 'organizer', foreignKey: 'organizerId' });
-
-//User con Ticket
-User.hasMany(Ticket);
-Ticket.belongsTo(User);
-
-//Establecimiento con Evento
-Establishment.hasMany(Event);
-Event.belongsTo(Establishment);
-
-//Evento y Trabjadores con la tabla Asigned
-Workpeople.hasMany(Assigned, { as: 'worker', foreignKey: 'workerId' });
-Event.hasMany(Assigned, { as: 'Event', foreignKey: 'EventId' });
-
-//Evento con las peticiones
+//Evento con request
+Event.hasMany(Requests);
 Requests.belongsTo(Event);
-Event.hasOne(Requests);
 
-//Evento con las series
+//Usuario con Reviws
+User.hasMany(Review);
+Review.belongsTo(User);
+
+//Evento con Reviews
+Event.hasMany(Review);
+Review.belongsTo(Event);
+
+//Evento con serie
 Event.hasMany(Series);
 Series.belongsTo(Event);
 
-//Series con Ticket
+//Series con ticket;
 Series.hasMany(Ticket);
 Ticket.belongsTo(Series);
 
-//Assigned con Tickets
+//Usuario con lugar
+User.hasMany(Place);
+Place.belongsTo(User);
+
+//Tipo de lugar con Lugar
+TypeOfPlace.hasMany(Place);
+Place.belongsTo(TypeOfPlace);
+
+//Localización con lugar
+Location.hasMany(Place);
+Place.belongsTo(Location);
+
+//Evento con asignar
+Event.hasMany(Assigned);
+Assigned.belongsTo(Event);
+
+//Usuario con Asignar
+User.hasMany(Assigned);
+Assigned.belongsTo(User);
+
+//Asignar con Ticker
 Assigned.hasMany(Ticket);
 Ticket.belongsTo(Assigned);
 
-
-/////// ACA VIENEN LAS RELACIONES ///////
+//Cliente y RPPS con Ticket
+User.hasMany(Ticket, { as: 'Cliente', foreignKey: 'clientId' });
+User.hasMany(Ticket, { as: 'Rpps', foreignKey: 'rppsId' });
 
 
 module.exports = {
