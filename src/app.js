@@ -1,19 +1,10 @@
 const { ApolloServer, gql } = require("apollo-server-express");
-const express = require("express");  
+const express = require("express");
+const typeDefs = require("./graphql/schemas/Schemas");
+const resolvers = require("./graphql/resolvers/index");
+const jwt = require("jsonwebtoken");
 
-// typeDefs
-const typeDefs = gql `
-    type Query {
-        hello: String
-    }
-`;
 
-// Resolvers
-const resolvers = {
-    Query:{
-        hello: () => "servidor funcionando che :D"
-    }
-}
 
 // Crear una función para configurar y devolver el servidor Apollo
 function createApolloServer() {
