@@ -5,8 +5,8 @@ module.exports = (sequelize) => {
     "rol",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4, // 1 2 3 4 5  "asdsadsadsadasdsa" "dsadsadsadsadsa"
+        type: DataTypes.INTEGER,
+        autoIncrement: true, // 1 2 3 4 5  "asdsadsadsadasdsa" "dsadsadsadsadsa"
         primaryKey: true,
       },
       type: {
@@ -15,13 +15,15 @@ module.exports = (sequelize) => {
           "organizer",
           "security",
           "cashier",
-          "god",
+          "superAdmin",
           "security/cashier"
         ),
-        allowNull: false,
+        allowNull: false, //falta agregar valor por defecto!
       },
       active: {
         type: DataTypes.BOOLEAN,
+        allowNull: false, 
+        defaultValue: true,
       },
     },
 

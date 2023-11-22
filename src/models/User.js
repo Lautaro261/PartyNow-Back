@@ -9,14 +9,6 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      /* name: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      last_name: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      }, */
       password: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -25,10 +17,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      /* dni_cuil: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      }, */
       profile_photo: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -37,17 +25,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      /* phone: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      }, */
-      /* redes: {
-        type: DataTypes.STRING, // array u objeto pasado a string
-        allowNull: true,
-      }, */
       verified: {
         type: DataTypes.BOOLEAN,
-        allowNull: true,
+        allowNull: false,
+        defaultValue: false,
       },
       follower: {
         type: DataTypes.FLOAT,
@@ -55,6 +36,8 @@ module.exports = (sequelize) => {
       },
       active: {
         type: DataTypes.BOOLEAN,
+        allowNull: false, 
+        defaultValue: true, 
       },
       /* number_tot_events_org: {
         type: DataTypes.FLOAT,
@@ -66,7 +49,7 @@ module.exports = (sequelize) => {
       }, */
     },
     {
-      timestamps: false,
+      timestamps: true,
     }
   );
 };

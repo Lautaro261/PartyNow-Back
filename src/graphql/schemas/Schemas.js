@@ -4,9 +4,10 @@ const typeDefs = gql `
 
     #INPUT
     input UserInput {
-        name: String
         email: String!
         password: String!
+        rol: String!
+        name: String
     }
 
     # TYPE QUERY
