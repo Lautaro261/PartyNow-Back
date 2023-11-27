@@ -3,7 +3,10 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql `
     #INPUT
     input DatabaseLoad {
-        carga: Int
+        rols: Boolean!
+        typeofplaces: Boolean
+        clients: Boolean
+        organizer: Boolean
     }
 
     input UserInput {
