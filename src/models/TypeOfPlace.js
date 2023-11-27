@@ -2,7 +2,7 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "typeOfPlace",
+    "typeofplace",
     {
       id: {
         type: DataTypes.UUID,
@@ -19,6 +19,8 @@ module.exports = (sequelize) => {
       },
       active: {
         type: DataTypes.BOOLEAN,
+        allowNull: false, 
+        defaultValue: true, 
       },
     },
     {

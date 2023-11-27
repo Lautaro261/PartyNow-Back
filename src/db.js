@@ -57,9 +57,9 @@ const {
    Review,
    Rol,
    Series,
-   SubMenu,
+   Submenu,
    Ticket,
-   TypeOfPlace,
+   Typeofplace,
    User
 
 } = sequelize.models
@@ -68,8 +68,8 @@ const {
 /////// ACA VIENEN LAS RELACIONES ///////
 
 //Usuario con Persona
-Profile.hasOne(User);
-User.belongsTo(Profile);
+User.hasOne(Profile);
+Profile.belongsTo(User);
 
 //Usuario con Seguidores
 User.hasMany(Follower, { as: 'customers', foreignKey: 'customersId' });
@@ -84,12 +84,12 @@ Rol.hasMany(Permission);
 Permission.belongsTo(Rol);
 
 //Permisos con subMenu
-SubMenu.hasMany(Permission);
-Permission.belongsTo(SubMenu);
+Submenu.hasMany(Permission);
+Permission.belongsTo(Submenu);
 
 //Menu con SubMenu
-Menu.hasMany(SubMenu);
-SubMenu.belongsTo(Menu);
+Menu.hasMany(Submenu);
+Submenu.belongsTo(Menu);
 
 //Usuario con Evento
 User.hasMany(Event);
@@ -120,8 +120,8 @@ User.hasMany(Place);
 Place.belongsTo(User);
 
 //Tipo de lugar con Lugar
-TypeOfPlace.hasMany(Place);
-Place.belongsTo(TypeOfPlace);
+Typeofplace.hasMany(Place);
+Place.belongsTo(Typeofplace);
 
 //Localización con lugar
 Location.hasMany(Place);
