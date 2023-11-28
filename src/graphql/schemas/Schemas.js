@@ -6,7 +6,7 @@ const typeDefs = gql `
         rols: Boolean!
         typeofplaces: Boolean
         clients: Boolean
-        organizer: Boolean
+        organizers: Boolean
     }
 
     input UserInput {

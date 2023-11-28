@@ -5,7 +5,7 @@ const { SALT } = process.env;
 
 const createUserController = async (input) =>{
     const { email, password, name, rol } = input
-    console.log(email, password, name)
+    //console.log(email, password, name)
     // 1 Busquedo si ya existe 
     const user = await User.findOne({where: {email: email}});
     if(user){
@@ -24,7 +24,7 @@ const createUserController = async (input) =>{
 
     //console.log("USER: ",newUser)
     const { id } = newUser?.dataValues
-    console.log("tengo id:",id)
+    //console.log("tengo id:",id)
     await Profile.create({ userId: id });
 
     return newUser;

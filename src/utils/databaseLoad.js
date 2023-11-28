@@ -56,7 +56,7 @@ const clients = [
     }
 ]
 
-const organizer = [
+const organizers = [
     {
         rol: 2,
         name: "ana",
@@ -96,5 +96,5 @@ module.exports = {
     rols,
     typeofplaces,
     clients,
-    organizer
+    organizers
 }

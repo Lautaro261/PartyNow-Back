@@ -3,86 +3,107 @@ const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const createUserController = require("../../controllers/createUser");
 const createPlaceController = require("../../controllers/createPlace");
-const data = require ("../../utils/databaseLoad");
-
+const createRolController = require("../../controllers/createRol");
+const createTypeOfPlaceController = require("../../controllers/createTypeOfPlace");
+const data = require("../../utils/databaseLoad");
 
 const resolversMutation = {
-    Mutation:{
+  Mutation: {
+    databaseLoad: async (root, { input }) => {
+      const { rols, typeofplaces, clients, organizers } = input;
+      let roleLoading = false;
+      let typeofplacesLoading = false;
+      let clientsLoading = false;
+      let organizerLoading = false;
 
-        databaseLoad: async(root,{input}) =>{
-            const { rols } = input;
-    let roleLoading = false;
-
-    try {
+      try {
         // CARGAR ROL
         if (rols) {
-            console.log("Entré!");
-            for (const rolData of data.rols) {
-                try {
-                    const { id, type } = rolData;
-                    const existingRol = await Rol.findOne({ where: { id } });
-
-                    if (!existingRol) {
-                        await Rol.create({
-                            id,
-                            type,
-                        });
-
-                        console.log(`Rol ${type} creado.`);
-                    } else {
-                        console.log(`Rol ${type} ya existe.`);
-                    }
-                } catch (error) {
-                    console.error(`Error al crear el rol: ${error.message}`);
-                }
+          for (const rolData of data.rols) {
+            try {
+              await createRolController(rolData)
+            } catch (error) {
+              console.error(`Error creating role: ${error.message}`);
             }
-
-            roleLoading = true;
+          }
+          roleLoading = true;
         }
 
         // CARGAR TIPO DE LUGARES
+        if (typeofplaces) {
+            for (const placeTypeData of data.typeofplaces) {
+                try {
+                    await createTypeOfPlaceController(placeTypeData)
+                } catch (error) {
+                    console.error(`Error creating place type: ${error.message}`);
+                }
+            }
+            typeofplacesLoading = true;
+        }
+
         // CREAR 4 CLIENTES
+        if (clients) {
+            for (const clientsData of data.clients) {
+                try {
+                    await createUserController(clientsData)
+                    
+                } catch (error) {
+                    console.error(`Error creating clients: ${error.message}`);
+                }
+            }
+            clientsLoading = true;
+        }
+
         // CREAR 4 ORGANIZADORES
-    } catch (error) {
-        console.error(`Error general: ${error.message}`);
-    } finally {
-        const mensaje = roleLoading ? "Carga exitosa" : "Error durante la carga";
+        if (organizers) {
+            for (const organizersData of data.organizers) {
+                try {
+                    await createUserController(organizersData)
+                    
+                } catch (error) {
+                    console.error(`Error creating organizers: ${error.message}`);
+                }
+            }
+            organizerLoading = true;
+        }
+
+
+      } catch (error) {
+        console.error(`General error: ${error.message}`);
+      } finally {
+        const mensaje = roleLoading && typeofplacesLoading && clientsLoading && organizerLoading
+          ? "Successful upload"
+          : "Error while loading";
         console.log(mensaje);
         return mensaje;
-    }
-},
+      }
+    },
 
-
-
-        createUser: async(root, {input}) => {
-
-            try {
-                const user = await createUserController(input) //FUNCION CONTROLADOR
-
-                if(!user){
-                throw new Error(`El usuario con el email: ${input.email}, ya existe.`);
-            }
-
-                return `User created successfully `;
-
-            } catch (error) {
-                console.log(error.message)
-                return `${error}`
-            }
-        },
-
-        createPlace: async(root, {input})=>{
-            try {
-                const place = await createPlaceController(input);
-
-            } catch (error) {
-                console.log(error.message)
-                return error.message
-            }
+    createUser: async (root, { input }) => {
+      try {
+        const user = await createUserController(input); 
+        if (!user) {
+          throw new Error(
+            `The user with the email: ${input.email} already exists.`
+          );
         }
-    }
 
+        return `User created successfully `;
+      } catch (error) {
+        console.log(error.message);
+        return `${error}`;
+      }
+    },
 
-}
+    createPlace: async (root, { input }) => {
+      try {
+        const place = await createPlaceController(input);
+      } catch (error) {
+        console.log(error.message);
+        return error.message;
+      }
+    },
+  },
+};
 
 module.exports = resolversMutation;
