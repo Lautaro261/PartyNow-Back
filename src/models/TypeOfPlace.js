@@ -2,11 +2,11 @@ const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
-    "TypeOfPlace",
+    "typeofplace",
     {
       id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        type: DataTypes.INTEGER,
+        autoIncrement: true, 
         primaryKey: true,
       },
       name: {
@@ -19,6 +19,8 @@ module.exports = (sequelize) => {
       },
       active: {
         type: DataTypes.BOOLEAN,
+        allowNull: false, 
+        defaultValue: true, 
       },
     },
     {
