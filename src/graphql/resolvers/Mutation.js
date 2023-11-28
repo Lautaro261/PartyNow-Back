@@ -21,7 +21,7 @@ const resolversMutation = {
         if (rols) {
           for (const rolData of data.rols) {
             try {
-              await createRolController(rolData)
+              await createRolController(rolData);
             } catch (error) {
               console.error(`Error creating role: ${error.message}`);
             }
@@ -31,49 +31,49 @@ const resolversMutation = {
 
         // CARGAR TIPO DE LUGARES
         if (typeofplaces) {
-            for (const placeTypeData of data.typeofplaces) {
-                try {
-                    await createTypeOfPlaceController(placeTypeData)
-                } catch (error) {
-                    console.error(`Error creating place type: ${error.message}`);
-                }
+          for (const placeTypeData of data.typeofplaces) {
+            try {
+              await createTypeOfPlaceController(placeTypeData);
+            } catch (error) {
+              console.error(`Error creating place type: ${error.message}`);
             }
-            typeofplacesLoading = true;
+          }
+          typeofplacesLoading = true;
         }
 
         // CREAR 4 CLIENTES
         if (clients) {
-            for (const clientsData of data.clients) {
-                try {
-                    await createUserController(clientsData)
-                    
-                } catch (error) {
-                    console.error(`Error creating clients: ${error.message}`);
-                }
+          for (const clientsData of data.clients) {
+            try {
+              await createUserController(clientsData);
+            } catch (error) {
+              console.error(`Error creating clients: ${error.message}`);
             }
-            clientsLoading = true;
+          }
+          clientsLoading = true;
         }
 
         // CREAR 4 ORGANIZADORES
         if (organizers) {
-            for (const organizersData of data.organizers) {
-                try {
-                    await createUserController(organizersData)
-                    
-                } catch (error) {
-                    console.error(`Error creating organizers: ${error.message}`);
-                }
+          for (const organizersData of data.organizers) {
+            try {
+              await createUserController(organizersData);
+            } catch (error) {
+              console.error(`Error creating organizers: ${error.message}`);
             }
-            organizerLoading = true;
+          }
+          organizerLoading = true;
         }
-
-
       } catch (error) {
         console.error(`General error: ${error.message}`);
       } finally {
-        const mensaje = roleLoading && typeofplacesLoading && clientsLoading && organizerLoading
-          ? "Successful upload"
-          : "Error while loading";
+        const mensaje =
+          roleLoading &&
+          typeofplacesLoading &&
+          clientsLoading &&
+          organizerLoading
+            ? "Successful upload"
+            : "Error while loading";
         console.log(mensaje);
         return mensaje;
       }
@@ -81,7 +81,7 @@ const resolversMutation = {
 
     createUser: async (root, { input }) => {
       try {
-        const user = await createUserController(input); 
+        const user = await createUserController(input);
         if (!user) {
           throw new Error(
             `The user with the email: ${input.email} already exists.`
@@ -98,6 +98,12 @@ const resolversMutation = {
     createPlace: async (root, { input }) => {
       try {
         const place = await createPlaceController(input);
+        if (!place) {
+          throw new Error(
+            `Error DEV: The place with the name: ${input.name} already exists.`
+          );
+        }
+        return `Place created successfully `;
       } catch (error) {
         console.log(error.message);
         return error.message;

@@ -17,13 +17,14 @@ const typeDefs = gql `
     }
 
     input PlaceInput {
+        email:String!
         typeOfPlace:ID!
         name:String!
         photo:String
         capacitance:Int
         addres:String!
         numeration:String!
-        map:String
+        maps:String
     }
 
     # TYPE QUERY
