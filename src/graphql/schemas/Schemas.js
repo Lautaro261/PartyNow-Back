@@ -28,6 +28,14 @@ const typeDefs = gql `
     }
 
     # TYPE QUERY
+
+    type Message{
+        rols: String
+        typeofplaces:String
+        clients:String
+        organizers:String
+    }
+
     type Query {
         hello: String
     }
@@ -35,7 +43,7 @@ const typeDefs = gql `
     #TYPE MUTATION
     type Mutation {
         #USUARIO
-        databaseLoad(input: DatabaseLoad): String
+        databaseLoad(input: DatabaseLoad): Message
         createUser(input: UserInput): String
         createPlace(input: PlaceInput):String
     }

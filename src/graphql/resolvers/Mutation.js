@@ -67,15 +67,17 @@ const resolversMutation = {
       } catch (error) {
         console.error(`General error: ${error.message}`);
       } finally {
-        const mensaje =
-          roleLoading &&
-          typeofplacesLoading &&
-          clientsLoading &&
-          organizerLoading
-            ? "Successful upload"
-            : "Error while loading";
-        console.log(mensaje);
-        return mensaje;
+
+            const result = {
+              rols: roleLoading ? "5 roles loaded" : "Error while loading",
+              typeofplaces: typeofplacesLoading ? "2 type of places loaded" : "Error while loading",
+              clients: clientsLoading ? "4 users loaded" : "Error while loading",
+              organizers: organizerLoading ? "4 organizers loaded" : "Error while loading", 
+            }
+        
+
+        //return { rols : result.rols};
+        return result
       }
     },
 
