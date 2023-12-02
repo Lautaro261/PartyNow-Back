@@ -27,8 +27,21 @@ const typeDefs = gql `
         maps:String
     }
 
-    # TYPE QUERY
+    input EventInput{
+        email: String!
+        place: ID
+        title: String!
+        description: String
+        date: String
+        time: String
+        capacitance: Int
+        serietitle: String!
+        price: String!
+        quantity: String!
 
+    }
+
+    #TYPES 
     type Message{
         rols: String
         typeofplaces:String
@@ -36,16 +49,26 @@ const typeDefs = gql `
         organizers:String
     }
 
+    # TYPE QUERY
     type Query {
         hello: String
     }
 
     #TYPE MUTATION
     type Mutation {
-        #USUARIO
+        #SOLO DEVS
         databaseLoad(input: DatabaseLoad): Message
+
+        #USUARIO
         createUser(input: UserInput): String
-        createPlace(input: PlaceInput):String
+
+        #LUGARES
+        createPlace(input: PlaceInput): String
+
+        #EVENTOS
+        createEvent(input: EventInput): String
+
+        #TICKETS
     }
 `;
 

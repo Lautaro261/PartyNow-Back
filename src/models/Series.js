@@ -9,8 +9,12 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      price: {
+      title:{
         type: DataTypes.STRING,
+        allowNull: true,
+      },
+      price: {
+        type: DataTypes.STRING, //cambiar a numero
         allowNull: true,
       },
       offCode: {
@@ -22,7 +26,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       quantity: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, //cambiar a numero
         allowNull: true,
       },
       stock: {
@@ -31,7 +35,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timestamps: false,
+      timestamps: true,
     }
   );
 };

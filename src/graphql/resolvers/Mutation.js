@@ -5,6 +5,7 @@ const createUserController = require("../../controllers/createUser");
 const createPlaceController = require("../../controllers/createPlace");
 const createRolController = require("../../controllers/createRol");
 const createTypeOfPlaceController = require("../../controllers/createTypeOfPlace");
+const createEventController = require("../../controllers/createEvent");
 const data = require("../../utils/databaseLoad");
 
 const resolversMutation = {
@@ -111,6 +112,21 @@ const resolversMutation = {
         return error.message;
       }
     },
+
+    createEvent: async(root, {input})=>{
+      try {
+        const event = await createEventController(input)
+        if (!event) {
+          throw new Error(
+            `Error DEV: The event with the title: ${input.title} already exists.`
+          );
+        }
+        return "Event created successfully"
+      } catch (error) {
+        console.log(error.message)
+        return error.message
+      }
+    }
   },
 };
 
