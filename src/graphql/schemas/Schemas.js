@@ -49,9 +49,28 @@ const typeDefs = gql `
         organizers:String
     }
 
+    type Place{
+        placeId: ID
+        name: String
+        nextDate: String
+        nextTime: String
+        coverPhoto: String
+        profilePhoto: String
+        score: String
+        organizer: String
+        verified: Boolean
+        type: String
+    }
+
     # TYPE QUERY
     type Query {
         hello: String
+
+        #SIN AUTENTIFICACION
+        getAllplaces: [Place]
+
+
+        #CON AUTENTIFICACION
     }
 
     #TYPE MUTATION

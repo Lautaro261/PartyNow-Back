@@ -1,7 +1,19 @@
 
 const resolversQuery = {
     Query:{
-        hello: () => "servidor funcionando che :D"
+        hello: async() =>{
+            return "servidor funcionando che :D"
+        },
+
+        getAllplaces: async(root,{input})=>{
+            try {
+                
+            } catch (error) {
+                console.log(error.message)
+                return error.message
+            }
+        },
+
     }
 }
 
