@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       date: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING,//borrar
         allowNull: true,
       },
       active: {

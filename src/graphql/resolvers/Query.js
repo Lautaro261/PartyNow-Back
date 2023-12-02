@@ -1,3 +1,4 @@
+const getAllPlacesController = require("../../controllers/getAllPlaces")
 
 const resolversQuery = {
     Query:{
@@ -7,6 +8,9 @@ const resolversQuery = {
 
         getAllplaces: async(root,{input})=>{
             try {
+                const places = await getAllPlacesController(input)
+
+                return places
                 
             } catch (error) {
                 console.log(error.message)

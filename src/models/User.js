@@ -10,7 +10,7 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
       password: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, // AGREGAR NAME
         allowNull: true,
       },
       email: {
