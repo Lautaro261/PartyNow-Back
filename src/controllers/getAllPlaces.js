@@ -4,7 +4,7 @@ const { Place, Typeofplace, Location, User} = require("../db");
 const getAllPlacesController = async(input)=>{
 
     const places = await Place.findAll({
-        attributes: ['name', 'photo'],
+        attributes: ['id','name', 'photo'],
         where: {
             active: true
         },
@@ -15,11 +15,11 @@ const getAllPlacesController = async(input)=>{
             },
             {
               model: Location,
-              attributes: ['addres', 'numeration', 'maps', ]
+              attributes: ['addres', 'numeration', 'maps' ]
             },
             {
                 model: User,
-                attributes: ['email', 'profile_photo']
+                attributes: ['username', 'profile_photo', 'verified']
               }
             ],
           order: [

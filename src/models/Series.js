@@ -11,11 +11,15 @@ module.exports = (sequelize) => {
       },
       title:{
         type: DataTypes.STRING,
+        allowNull: false,
+      },
+      currency: {
+        type: DataTypes.STRING, 
         allowNull: true,
       },
       price: {
-        type: DataTypes.STRING, //cambiar a numero
-        allowNull: true,
+        type: DataTypes.STRING, 
+        allowNull: false,
       },
       offCode: {
         type: DataTypes.STRING,
@@ -26,8 +30,8 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       quantity: {
-        type: DataTypes.STRING, //cambiar a numero
-        allowNull: true,
+        type: DataTypes.INTEGER, 
+        allowNull: false,
       },
       stock: {
         type: DataTypes.BOOLEAN,

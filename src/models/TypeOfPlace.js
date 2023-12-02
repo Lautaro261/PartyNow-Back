@@ -13,10 +13,6 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      date: {
-        type: DataTypes.STRING,//borrar
-        allowNull: true,
-      },
       active: {
         type: DataTypes.BOOLEAN,
         allowNull: false, 
