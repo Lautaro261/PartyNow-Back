@@ -8,9 +8,17 @@ const resolversQuery = {
 
         getAllplaces: async(root,{input})=>{
             try {
-                const places = await getAllPlacesController(input)
+                const arrayplaces = await getAllPlacesController(input)
 
-                return places
+                const response = [
+                    {
+                        category: "Bienvenido",
+                        format: "vertical",
+                        places: arrayplaces
+                    }
+                ] 
+
+                return response
                 
             } catch (error) {
                 console.log(error.message)

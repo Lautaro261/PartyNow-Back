@@ -7,24 +7,38 @@ const typeDefs = gql `
         typeofplaces: Boolean
         clients: Boolean
         organizers: Boolean
+        places: Boolean
     }
 
     input UserInput {
         email: String!
         password: String!
         rol: ID!
-        name: String
+        username: String!
+        profilePhoto: String
+        coverPhoto: String
+        firstName: String
+        lastName: String
+        dni: String
+        phone: String
+        birthday: String
     }
 
     input PlaceInput {
-        email:String!
+        username:String!
         typeOfPlace:ID!
-        name:String!
-        photo:String
+        nameOfPlace:String!
+        coverPhoto:String
+        profilePhoto: String
         capacitance:Int
+        country:String!
+        province:String!
+        city: String!
         addres:String!
         numeration:String!
         maps:String
+        longitude:String
+        latitude:String
     }
 
     input EventInput{
@@ -47,11 +61,12 @@ const typeDefs = gql `
         typeofplaces:String
         clients:String
         organizers:String
+        places: String
     }
 
     type Place{
-        placeId: ID
-        name: String
+        localId: ID
+        localName: String
         nextDate: String
         nextTime: String
         coverPhoto: String

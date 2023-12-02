@@ -11,11 +11,12 @@ const data = require("../../utils/databaseLoad");
 const resolversMutation = {
   Mutation: {
     databaseLoad: async (root, { input }) => {
-      const { rols, typeofplaces, clients, organizers } = input;
+      const { rols, typeofplaces, clients, organizers, places } = input;
       let roleLoading = false;
       let typeofplacesLoading = false;
       let clientsLoading = false;
       let organizerLoading = false;
+      let placeLoading = false;
 
       try {
         // CARGAR ROL
@@ -65,6 +66,18 @@ const resolversMutation = {
           }
           organizerLoading = true;
         }
+
+        // CREAR 3 LOCALES
+        if (places) {
+          for (const placesData of data.places) {
+            try {
+              await createPlaceController(placesData);
+            } catch (error) {
+              console.error(`Error creating places: ${error.message}`);
+            }
+          }
+          placeLoading = true;
+        }
       } catch (error) {
         console.error(`General error: ${error.message}`);
       } finally {
@@ -74,6 +87,7 @@ const resolversMutation = {
               typeofplaces: typeofplacesLoading ? "2 type of places loaded" : "Error while loading",
               clients: clientsLoading ? "4 users loaded" : "Error while loading",
               organizers: organizerLoading ? "4 organizers loaded" : "Error while loading", 
+              places: placeLoading ? "3 places loaded" : "Error while loading",
             }
         
 
