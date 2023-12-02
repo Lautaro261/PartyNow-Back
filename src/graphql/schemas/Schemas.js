@@ -77,12 +77,18 @@ const typeDefs = gql `
         type: String
     }
 
+    type PlaceCategory {
+    category: String
+    format: String
+    places: [Place]
+}
+
     # TYPE QUERY
     type Query {
         hello: String
 
         #SIN AUTENTIFICACION
-        getAllplaces: [Place]
+        getAllplaces: [PlaceCategory]
 
 
         #CON AUTENTIFICACION
