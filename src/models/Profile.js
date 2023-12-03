@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
         defaultValue: DataTypes.UUIDV4, //revisar id
         primaryKey: true,
       },
-      name: {
+      first_name: {                          
         type: DataTypes.STRING,
         allowNull: true,
       },
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      date: {
+      birthday: {
         type: DataTypes.STRING,
         allowNull: true,
       },

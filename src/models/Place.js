@@ -13,12 +13,24 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      photo: {
+      description: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      profile_photo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      banner_photo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      photos: {
         type: DataTypes.STRING,
         allowNull: true,
       },
       capacitance: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       date: {

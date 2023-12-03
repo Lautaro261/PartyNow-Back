@@ -18,7 +18,8 @@ module.exports = (sequelize) => {
           "superAdmin",
           "security/cashier"
         ),
-        allowNull: false, //falta agregar valor por defecto!
+        allowNull: false,
+        defaultValue: "clients"
       },
       active: {
         type: DataTypes.BOOLEAN,

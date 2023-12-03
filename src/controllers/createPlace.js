@@ -2,18 +2,26 @@ const { Place, Typeofplace, Location, User, Rol } = require("../db");
 
 const createPlaceController = async (input) => {
   const {
+    username,
     typeOfPlace,
-    photo,
-    name,
+    nameOfPlace,
+    description,
+    coverPhoto,
+    profilePhoto,
+    photos,
+    capacitance,
+    country,
+    province,
+    city,
     addres,
     numeration,
     maps,
-    capacitance,
-    email,
+    longitude,
+    latitude
   } = input;
 
   const user = await User.findOne({
-    where: { email },
+    where: { username },
     include: [
       {
         model: Rol,
@@ -24,28 +32,36 @@ const createPlaceController = async (input) => {
 
   if (!user) {
     throw new Error(
-      `Error DEV: user ${email} does not have the role for the request`
+      `Error DEV: user ${username} does not have the role for the request`
     );
   }
 
   const { id } = user?.dataValues;
-  const place = await Place.findOne({ where: { name } });
+  const place = await Place.findOne({ where: { name: nameOfPlace } });
 
   if (place) {
-    throw new Error(`Error DEV: The place ${name} already exists`);
+    throw new Error(`Error DEV: The place ${nameOfPlace} already exists`);
   }
 
   const newLocation = await Location.create({
+    country,
+    province,
+    city,
     addres,
     numeration,
     maps,
+    longitude,
+    latitude
   });
 
   const newPlace = await Place.create({
-    name,
-    photo,
-    typeofplaceId: typeOfPlace,
+    name: nameOfPlace,
+    description,
+    profile_photo: profilePhoto,
+    banner_photo: coverPhoto,
+    photos,
     capacitance,
+    typeofplaceId: typeOfPlace,
     userId: id,
     locationId: newLocation?.dataValues.id,
   });

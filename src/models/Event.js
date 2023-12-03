@@ -28,6 +28,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      photo: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       link: {
         type: DataTypes.STRING,
         allowNull: true,
@@ -55,7 +59,7 @@ module.exports = (sequelize) => {
       },
     },
     {
-      timestamps: false,
+      timestamps: true,
     }
   );
 };

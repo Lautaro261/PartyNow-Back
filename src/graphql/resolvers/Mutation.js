@@ -5,16 +5,18 @@ const createUserController = require("../../controllers/createUser");
 const createPlaceController = require("../../controllers/createPlace");
 const createRolController = require("../../controllers/createRol");
 const createTypeOfPlaceController = require("../../controllers/createTypeOfPlace");
+const createEventController = require("../../controllers/createEvent");
 const data = require("../../utils/databaseLoad");
 
 const resolversMutation = {
   Mutation: {
     databaseLoad: async (root, { input }) => {
-      const { rols, typeofplaces, clients, organizers } = input;
+      const { rols, typeofplaces, clients, organizers, places } = input;
       let roleLoading = false;
       let typeofplacesLoading = false;
       let clientsLoading = false;
       let organizerLoading = false;
+      let placeLoading = false;
 
       try {
         // CARGAR ROL
@@ -64,18 +66,33 @@ const resolversMutation = {
           }
           organizerLoading = true;
         }
+
+        // CREAR 3 LOCALES
+        if (places) {
+          for (const placesData of data.places) {
+            try {
+              await createPlaceController(placesData);
+            } catch (error) {
+              console.error(`Error creating places: ${error.message}`);
+            }
+          }
+          placeLoading = true;
+        }
       } catch (error) {
         console.error(`General error: ${error.message}`);
       } finally {
-        const mensaje =
-          roleLoading &&
-          typeofplacesLoading &&
-          clientsLoading &&
-          organizerLoading
-            ? "Successful upload"
-            : "Error while loading";
-        console.log(mensaje);
-        return mensaje;
+
+            const result = {
+              rols: roleLoading ? "5 roles loaded" : "Error while loading",
+              typeofplaces: typeofplacesLoading ? "2 type of places loaded" : "Error while loading",
+              clients: clientsLoading ? "4 users loaded" : "Error while loading",
+              organizers: organizerLoading ? "4 organizers loaded" : "Error while loading", 
+              places: placeLoading ? "3 places loaded" : "Error while loading",
+            }
+        
+
+        //return { rols : result.rols};
+        return result
       }
     },
 
@@ -109,6 +126,21 @@ const resolversMutation = {
         return error.message;
       }
     },
+
+    createEvent: async(root, {input})=>{
+      try {
+        const event = await createEventController(input)
+        if (!event) {
+          throw new Error(
+            `Error DEV: The event with the title: ${input.title} already exists.`
+          );
+        }
+        return "Event created successfully"
+      } catch (error) {
+        console.log(error.message)
+        return error.message
+      }
+    }
   },
 };
 
